@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/com/bmob/lostfound/AddActivity.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/fyzs/activity/DangjiActivity.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/fyzs/activity/DetailBookActivity.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/fyzs/activity/MainActivity.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/fyzs/fragment/KebiaoFragment.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/fyzs/fragment/LeftFragment.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/fyzs/fragment/LibraryFragment.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/fyzs/fragment/MySettingsFragment.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/fyzs/fragment/PerInfoFragment.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/fyzs/tool/IOUtils.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/fyzs/tool/RefreshableView.java" charset="GBK" />
+    <file url="PROJECT" charset="GBK" />
+  </component>
+</project>

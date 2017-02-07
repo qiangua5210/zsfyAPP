@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="E:\android2\zhangshangfangyuan\libs\bmob_v3.1.1beta.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="3b70cca78172af77118481a3f097b542e55e55a6">
+        <dex dex="E:\android2\zhangshangfangyuan\build\intermediates\pre-dexed\debug\bmob_v3.1.1beta_660930ae03239c20429fb96bf17b5830ccc21374.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\android2\zhangshangfangyuan\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="E:\android2\zhangshangfangyuan\build\intermediates\pre-dexed\debug\com.android.support-support-v4-21.0.3_c80fba9b66b2c4242dbd2496bbafa1fa3861bceb.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\android2\zhangshangfangyuan\libs\commons-codec-1.9.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="9ce04e34240f674bc72680f8b843b1457383161a">
+        <dex dex="E:\android2\zhangshangfangyuan\build\intermediates\pre-dexed\debug\commons-codec-1.9_484551ffdeed94b3c3f7a0fb2dde3739da6c0808.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\android2\zhangshangfangyuan\libs\picasso-2.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="74137f8d9aac26dd9463efe32271f2be8d41cda9">
+        <dex dex="E:\android2\zhangshangfangyuan\build\intermediates\pre-dexed\debug\picasso-2.2.0_6e64f19ea47c5f3244ea4e992bfdce516a6731c0.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\androidSDK\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="E:\android2\zhangshangfangyuan\build\intermediates\pre-dexed\debug\support-annotations-21.0.3_f44216137a5b4c49ad881fe7e10ae0bd902db517.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\android2\zhangshangfangyuan\libs\httpclient-4.5.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="733db77aa8d9b2d68015189df76ab06304406e50">
+        <dex dex="E:\android2\zhangshangfangyuan\build\intermediates\pre-dexed\debug\httpclient-4.5.2_4554dd732293984229e660a1433c4d7cc3f55d76.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\android2\zhangshangfangyuan\libs\jsoup-1.9.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="edb0ddf3bd59dec0947f6eda75b6cf2264fc5e4b">
+        <dex dex="E:\android2\zhangshangfangyuan\build\intermediates\pre-dexed\debug\jsoup-1.9.2_ba8a2384afc14e715802381587f56ec5d3e3a414.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\android2\zhangshangfangyuan\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\jars\libs\internal_impl-21.0.3.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="E:\android2\zhangshangfangyuan\build\intermediates\pre-dexed\debug\internal_impl-21.0.3_3edcce128787d2fe84ee3e1ebe1377df3ee68e1f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\android2\zhangshangfangyuan\libs\httpclient-win-4.5.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="80635f3fdebcb3687ca3246214e597916504b996">
+        <dex dex="E:\android2\zhangshangfangyuan\build\intermediates\pre-dexed\debug\httpclient-win-4.5.2_bfc0ad475b352fdc0ae3f7937fb3c554889f13d7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\android2\zhangshangfangyuan\libs\httpclient-cache-4.5.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="bd50ea83908dbf2f387a333216e66d2f0c5079bd">
+        <dex dex="E:\android2\zhangshangfangyuan\build\intermediates\pre-dexed\debug\httpclient-cache-4.5.2_af0aa27a6878392b31cbee87d46890441d981c58.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\android2\zhangshangfangyuan\libs\commons-logging-1.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="4bfc12adfe4842bf07b657f0369c4cb522955686">
+        <dex dex="E:\android2\zhangshangfangyuan\build\intermediates\pre-dexed\debug\commons-logging-1.2_daa7386f15e957281328c47f6c22c1478bdcb1f3.jar" />
+    </item>
+
+</items>
