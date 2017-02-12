@@ -326,7 +326,7 @@ public class LoginActivity extends Activity {
 
 	public void getUser() {
 		SimpleDateFormat formatter = new SimpleDateFormat(
-				"yyyy年MM月dd日    HH:mm:ss     ");
+				"yyyy");
 		Date curDate = new Date(System.currentTimeMillis());// 获取当前时间
 		String time = formatter.format(curDate);
 		SharedPreferences sp = this.getSharedPreferences("StuData", 0);

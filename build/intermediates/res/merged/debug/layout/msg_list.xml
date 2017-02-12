@@ -19,6 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        style="@style/Smile.TextView._Gray"
         android:text="本次更新新增了教师登录以及访客登录;同时优化了课表查询，将课表分成每一周显示;"
         android:textSize="15dp" />
 
@@ -33,12 +34,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="来自：开发者 "
+            style="@style/Smile.TextView._Gray"
             android:textSize="13dp" />
          <TextView
             android:id="@+id/tv_msg_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="100dp"
+             style="@style/Smile.TextView._Gray"
             android:text="时间：2016/08/16 "
             android:textSize="13dp" />
     </LinearLayout>

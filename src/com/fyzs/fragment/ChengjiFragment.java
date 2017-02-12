@@ -6,23 +6,20 @@ import java.util.List;
 
 import com.czfy.zsfy.R;
 import com.fyzs.Http.UpdateCJ;
-import com.fyzs.activity.LibraryActivity;
-import com.fyzs.activity.LoginActivity;
 import com.fyzs.activity.MainActivity;
 import com.fyzs.database.Chengji;
 import com.fyzs.database.StudentDao;
-import com.fyzs.tool.BookData;
 import com.fyzs.tool.ListadapterChengji;
 import com.fyzs.tool.RefreshableView;
 import com.fyzs.tool.RefreshableView.PullToRefreshListener;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,8 +53,9 @@ public class ChengjiFragment extends Fragment {
 	private static StudentDao dao;
 	private myAdapter myadapter;
 	private ArrayList<HashMap<String, String>> list1 = new ArrayList<HashMap<String, String>>();
-	private Button query;
+	private Button updatecj;//刷新
 	int index=0;
+	private static final String TAG = "ChengjiFragment";
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 	}
@@ -75,15 +73,47 @@ public class ChengjiFragment extends Fragment {
 				.findViewById(R.id.refreshable_view);
 		dao = new StudentDao(ChengjiFragment.this.getActivity());
 		infos = dao.findAll();
-		query = (Button) view.findViewById(R.id.query);
+		updatecj = (Button) view.findViewById(R.id.query);
 		
 		qsp = (Spinner) view.findViewById(R.id.qsp);
 		listview = (ListView) view.findViewById(R.id.list_quiry);
 		list.add("历年成绩");
-		list.add("2014-2015--1");
-		list.add("2014-2015--2");
-		list.add("2015-2016--1");
-		list.add("2015-2016--2");
+		String[] xuenianstr=new String[6];
+		for(int j=0;j<6;j++)
+			xuenianstr[j]="";
+		int x=0,iscfxq=1;
+		for(int i=0;i<infos.size();i++) {
+
+			Chengji ke = infos.get(i);
+			for(int j=0;j<x;j++)
+				if(xuenianstr[j].equals(ke.getXuenian().toString()))//排除重复
+					iscfxq=0;
+			if(iscfxq==1) {
+				Log.d(TAG,ke.getXuenian().toString());
+				xuenianstr[x] = ke.getXuenian().toString();
+				x++;
+			}
+			iscfxq=1;
+		}
+		for(int i=0;i<x;i++)
+		{
+			list.add(xuenianstr[i]+"--"+1);
+			list.add(xuenianstr[i]+"--"+2);
+
+		}
+
+//		SimpleDateFormat formatter = new SimpleDateFormat(
+//				"yyyy");
+//		Date curDate = new Date(System.currentTimeMillis());// 获取当前时间
+//		String nowyearstr = formatter.format(curDate);
+//		int nowyear=Integer.parseInt(nowyearstr);
+
+//		list.add(nowyear-2+"-"+(nowyear-1)+"--1");
+//		list.add((nowyear-2)+"-"+(nowyear-1)+"--2");
+//		list.add(nowyear-1+"-"+nowyear+"--1");
+//		list.add(nowyear-1+"-"+nowyear+"--2");
+//		list.add(nowyear+"-"+(nowyear+1)+"--1");
+		//list.add("2015-2016--2");
 		setSpinner(view);
 		// InitListView();
 		if (infos.size() == 0) {
@@ -92,31 +122,79 @@ public class ChengjiFragment extends Fragment {
 		}
 		myadapter = new myAdapter();
 		listview.setAdapter(myadapter); //
-		query.setOnClickListener(new OnClickListener() {// 查询点击事件
+		updatecj.setOnClickListener(new OnClickListener() {// 查询点击事件
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-//				int i2=dao.delete("1");
-//				System.out.println("删除："+i2);
+//
+				SharedPreferences sp = ChengjiFragment.this
+						.getActivity().getSharedPreferences("StuData",
+								0);
+
+				final String xh = sp.getString("xh", "");
+				final String pwd = sp.getString("pwd", "");
+				String type = "";
 				int i = qsp.getSelectedItemPosition();
 				if (i == 0) {
-					infos = dao.findAll();
-					myadapter = new myAdapter();
-					listview.setAdapter(myadapter); //
-					myadapter.notifyDataSetChanged();
-				} else {
+					final List<Chengji> infos1 = dao.findAll();
+
+					System.out.println("infos:" + infos1.size());
+					new Thread() {
+						public void run() {
+							int i=UpdateCJ.Update(xh, pwd, "", "", "1",
+									infos1.size(),
+									ChengjiFragment.this.getActivity());
+							index=i;
+							if(index==1)
+							{
+								infos = dao.findAll();
+								handler.sendEmptyMessage(1);
+
+							}
+							else
+								handler.sendEmptyMessage(2);
+						};
+					}.start();
+
+				} else if (i == 4) {
 					String str = list.get(i);
-					String xuenian = str.split("--")[0];
-					String xueqi = str.split("--")[1];
-//					if (i == 4)
-//						Toast.makeText(ChengjiFragment.this.getActivity(),
-//								"想获取最新成绩需重新登录", 1).show();
-					infos = dao.findXuenian(xuenian, xueqi);
+					final String xuenian = str.split("--")[0];
+					final String xueqi = str.split("--")[1];
+					final List<Chengji> infos1 = dao.findXuenian(
+							xuenian, xueqi);
+					System.out.println("infos1:" + infos1.size());
 					// System.out.println(infos.size());
-					listview.setAdapter(myadapter);
-					myadapter.notifyDataSetChanged();
+
+					new Thread() {
+						public void run() {
+							int i=UpdateCJ.Update(xh, pwd, xuenian, xueqi,
+									"2", infos1.size(),
+									ChengjiFragment.this.getActivity());
+							index=i;
+							if(index==1)
+							{
+								infos = dao.findXuenian(xuenian, xueqi);
+								handler.sendEmptyMessage(1);
+
+
+							}
+							else
+								handler.sendEmptyMessage(2);
+						};
+					}.start();
+
+				} else {
+					handler.sendEmptyMessage(0);
 				}
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				refreshableView.finishRefreshing();
+
+
 
 			}
 		});
@@ -229,8 +307,7 @@ public class ChengjiFragment extends Fragment {
 		public void handleMessage(Message msg) {// handler接收到消息后就会执行此方法
 
 			if (msg.what == 1) {
-				Toast.makeText(ChengjiFragment.this.getActivity(), "有最新成绩更新",
-						0).show();
+				Toast.makeText(ChengjiFragment.this.getActivity(), "有最新成绩更新",0).show();
 				
 				myadapter = new myAdapter();
 				listview.setAdapter(myadapter); //
@@ -273,7 +350,24 @@ public class ChengjiFragment extends Fragment {
 					int arg2, long arg3) {
 				// TODO Auto-generated method stub
 				// 下拉选择的
-
+				int i = qsp.getSelectedItemPosition();
+				if (i == 0) {
+					infos = dao.findAll();
+					myadapter = new myAdapter();
+					listview.setAdapter(myadapter); //
+					myadapter.notifyDataSetChanged();
+				} else {
+					String str = list.get(i);
+					String xuenian = str.split("--")[0];
+					String xueqi = str.split("--")[1];
+//					if (i == 4)
+//						Toast.makeText(ChengjiFragment.this.getActivity(),
+//								"想获取最新成绩需重新登录", 1).show();
+					infos = dao.findXuenian(xuenian, xueqi);
+					// System.out.println(infos.size());
+					listview.setAdapter(myadapter);
+					myadapter.notifyDataSetChanged();
+				}
 				// System.out.println(adapter.getItem(arg2));
 			}
 
