@@ -21,7 +21,11 @@
             android:gravity="center"
             android:text=""
             android:visibility="visible" />
-
+        <ScrollView
+            android:id="@+id/scroll_body"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none" >
         <LinearLayout
             android:id="@+id/content"
             android:layout_width="fill_parent"
@@ -42,7 +46,7 @@
                 android:paddingRight="20.0dip"
                 android:paddingTop="15.0dip" />
         </LinearLayout>
-
+    </ScrollView>
         <View
             android:layout_width="fill_parent"
             android:layout_height="1.0px"

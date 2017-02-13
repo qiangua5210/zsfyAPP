@@ -268,6 +268,11 @@ public class RefreshableView extends LinearLayout implements OnTouchListener {
 		return false;
 	}
 
+	 public void setUpdate()//�˹�ˢ��
+	 {
+		 new RefreshingTask().execute();
+
+	 }
 	/**
 	 * 给下拉刷新控件注册一个监听器�?
 	 * 

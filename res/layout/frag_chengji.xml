@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
             android:background="@drawable/btn_login_ok_selector"
-            android:text="查询"
+            android:text="刷新"
             android:textColor="#ffffff" />
     </LinearLayout>
 

@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -42,7 +43,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 
 /**
- * 
+ *
  * @author sinyu
  * @description 浠婃棩
  */
@@ -77,7 +78,7 @@ public class KebiaoFragment extends Fragment {
 	private static StudentDao dao;
 	List<Kebiao> infos;
 	String[] shixunArr;
-
+	private static final String TAG = "KebiaoFragment";
 	String logintype = "";
 	public int zhouci = 1;// 控制周次,0表示所有
 	int dangqianzhou = 0;// 控制当前周
@@ -108,12 +109,12 @@ public class KebiaoFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+							 Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.frag_kebiao, null);
 		dao = new StudentDao(KebiaoFragment.this.getActivity());
 		infos = dao.findAllKebiao();
-		//dangqianzhou = DateUtils.getWeek(); //BUG
-		dangqianzhou =0;
+		dangqianzhou = DateUtils.getWeek(); //BUG
+		//dangqianzhou =0;
 		System.out.println("周！！！！" + dangqianzhou);
 		shixunhei = infos.size() - 5;
 		try {
@@ -126,12 +127,12 @@ public class KebiaoFragment extends Fragment {
 		head_sp = (Spinner) view.findViewById(R.id.head_sp);
 		list.add("查看全部");
 //		// 控制周次
-//		for (int i = 1; i <= 20; i++) {
-//			if (i == dangqianzhou) {
-//				list.add("第" + i + "周（本周）");
-//			} else
-//				list.add("第" + i + "周");
-//		}
+		for (int i = 1; i <= 40; i++) {
+			if (i == dangqianzhou) {
+				list.add("第" + i + "周（本周）");
+			} else
+				list.add("第" + i + "周");
+		}
 		setSpinner();
 
 		System.out.println(infos.size());
@@ -165,7 +166,7 @@ public class KebiaoFragment extends Fragment {
 
 			@Override
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
-					int arg2, long arg3) {
+									   int arg2, long arg3) {
 				// TODO Auto-generated method stub
 				// 下拉选择的
 				handler.sendEmptyMessage(arg2);
@@ -181,7 +182,7 @@ public class KebiaoFragment extends Fragment {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param str
 	 *            课程内容
 	 * @param w
@@ -235,7 +236,7 @@ public class KebiaoFragment extends Fragment {
 				builder.setPositiveButton("确定",
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog,
-									int which) {
+												int which) {
 								dialog.dismiss();
 								// 设置你的操作事项
 							}
@@ -388,8 +389,8 @@ public class KebiaoFragment extends Fragment {
 						+ str1[4] : str1[0] + "\n" + str1[1] + "\n" + str1[2];// 教师加4
 			}
 		}
-		
-		
+
+
 		if (str1.length == huiche)// 一个信息
 		{
 			if (zhoucichuli(str1[1])) {
@@ -596,7 +597,7 @@ public class KebiaoFragment extends Fragment {
 					}
 				} else {
 					if (Integer.parseInt(fzarr[i]) == zhouci)// 8，10-16
-																// 是否8=zhouci
+					// 是否8=zhouci
 					{
 						xianshi = true;
 					}
@@ -641,7 +642,7 @@ public class KebiaoFragment extends Fragment {
 				}
 			} else {
 				if (Integer.parseInt(cl1) == zhouci)// 8，10-16
-													// 是否8=zhouci
+				// 是否8=zhouci
 				{
 					xianshi = true;
 				}
@@ -758,7 +759,7 @@ public class KebiaoFragment extends Fragment {
 	public void updateKB(int index) {
 		kechengTVid = 801;
 		course_table_layout.removeAllViews();// 删除所有view
-		zhouci = 0;
+		zhouci = index;
 
 		int x = 1;
 		infos = dao.findAllKebiao();
@@ -875,29 +876,29 @@ public class KebiaoFragment extends Fragment {
 
 		int WeekDay = DateUtils.getWeekDay();
 		switch (WeekDay) {
-		case 1:
-			monColum.setBackgroundColor(R.color.blue);
-			break;
-		case 2:
-			tueColum.setBackgroundColor(R.color.blue);
-			break;
-		case 3:
-			wedColum.setBackgroundColor(R.color.blue);
-			break;
-		case 4:
-			thrusColum.setBackgroundColor(R.color.blue);
-			break;
-		case 5:
-			friColum.setBackgroundColor(R.color.blue);
-			break;
-		case 6:
-			satColum.setBackgroundColor(R.color.blue);
-			break;
-		case 7:
-			sunColum.setBackgroundColor(R.color.blue);
-			break;
-		default:
-			break;
+			case 1:
+				monColum.setBackgroundColor(R.color.blue);
+				break;
+			case 2:
+				tueColum.setBackgroundColor(R.color.blue);
+				break;
+			case 3:
+				wedColum.setBackgroundColor(R.color.blue);
+				break;
+			case 4:
+				thrusColum.setBackgroundColor(R.color.blue);
+				break;
+			case 5:
+				friColum.setBackgroundColor(R.color.blue);
+				break;
+			case 6:
+				satColum.setBackgroundColor(R.color.blue);
+				break;
+			case 7:
+				sunColum.setBackgroundColor(R.color.blue);
+				break;
+			default:
+				break;
 		}
 
 		this.screenWidth = width;
@@ -909,7 +910,7 @@ public class KebiaoFragment extends Fragment {
 		// 动态生成12 * maxCourseNum个textview
 		for (int i = 1; i <= 10; i++) {
 
-			for (int j = 1; j <= 8; j++) {
+			for (int j = 1; j <=8; j++) {
 
 				TextView tx = new TextView(KebiaoFragment.this.getActivity());
 				tx.setId((i - 1) * 8 + j);
@@ -993,7 +994,7 @@ public class KebiaoFragment extends Fragment {
 
 				@Override
 				public void onItemClick(AdapterView<?> parent, View view,
-						int position, long id) {
+										int position, long id) {
 					// TODO Auto-generated method stub
 					com.fyzs.tool.ChengjiDialog.Builder builder = new com.fyzs.tool.ChengjiDialog.Builder(
 							KebiaoFragment.this.getActivity());
@@ -1002,7 +1003,7 @@ public class KebiaoFragment extends Fragment {
 					builder.setPositiveButton("确定",
 							new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog,
-										int which) {
+													int which) {
 									dialog.dismiss();
 									// 设置你的操作事项
 
@@ -1036,88 +1037,89 @@ public class KebiaoFragment extends Fragment {
 			// course_table_layout.addView(tx1);
 		} catch (Exception e) {
 			// TODO: handle exception
-			Toast.makeText(KebiaoFragment.this.getActivity(), "教务系统已关闭课表查询", 1)
+			Toast.makeText(KebiaoFragment.this.getActivity(), "教务系统已关闭课表查询1", 1)
 					.show();
 		}
-		try {
+		//try {
 
-		for (int i = 0; i < 5; i++) {
-			Kebiao ke = infos.get(i);
-			System.out.println(infos.size());
-			System.out.println(ke.getMonday() + "!!!!");
-			if (ke.getMonday().equals("?")) {
-				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-			} else {
-				String strxianshi = kcshujuchuli(ke.getMonday());
-				if (!strxianshi.equals("")) {
-					createkecheng(strxianshi, x, 1, 1);
+			for (int i = 0; i < 5; i++) {
+				Kebiao ke = infos.get(i);
+				System.out.println(infos.size());
+				System.out.println(ke.getMonday() + "!!!!");
+				if (ke.getMonday().length()<2) {
+					System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+				} else {
+					String strxianshi = kcshujuchuli(ke.getMonday());
+					if (!strxianshi.equals("")) {
+						createkecheng(strxianshi, x, 1, 1);
+					}
+
+				}
+				if (ke.getTuesday().length()<2) {
+					// System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+				} else {
+					String strxianshi = kcshujuchuli(ke.getTuesday());
+					if (!strxianshi.equals("")) {
+						createkecheng(strxianshi, x, 2, 2);
+					}
+
+				}
+				if (ke.getWednesday().length()<2) {
+					// System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+				} else {
+					String strxianshi = kcshujuchuli(ke.getWednesday());
+					if (!strxianshi.equals("")) {
+						createkecheng(strxianshi, x, 3, 3);
+					}
+
+				}
+				if (ke.getThursday().length()<2) {
+					// System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+				} else {
+					String strxianshi = kcshujuchuli(ke.getThursday());
+					if (!strxianshi.equals("")) {
+						createkecheng(strxianshi, x, 4, 4);
+					}
+
+				}
+				if (ke.getFriday().length()<2) {
+					// System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+				} else {
+					String strxianshi = kcshujuchuli(ke.getFriday());
+					if (!strxianshi.equals("")) {
+						createkecheng(strxianshi, x, 5, 0);
+					}
+
+				}
+				if (ke.getSaturated().length()<2) {
+					 System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+				} else {
+					Log.d(TAG, "updateKB:"+ke.getSaturated());
+					String strxianshi = kcshujuchuli(ke.getSaturated());
+					if (!strxianshi.equals("")) {
+						createkecheng(strxianshi, x, 6, 1);
+					}
+
 				}
 
-			}
-			if (ke.getTuesday().equals("?")) {
-				// System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-			} else {
-				String strxianshi = kcshujuchuli(ke.getTuesday());
-				if (!strxianshi.equals("")) {
-					createkecheng(strxianshi, x, 2, 2);
+				if (ke.getSunday().length()<2) {
+					// System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+				} else {
+					String strxianshi = kcshujuchuli(ke.getSunday());
+					if (!strxianshi.equals("")) {
+						createkecheng(strxianshi, x, 7, 2);
+					}
+
 				}
 
-			}
-			if (ke.getWednesday().equals("?")) {
-				// System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-			} else {
-				String strxianshi = kcshujuchuli(ke.getWednesday());
-				if (!strxianshi.equals("")) {
-					createkecheng(strxianshi, x, 3, 3);
-				}
-
-			}
-			if (ke.getThursday().equals("?")) {
-				// System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-			} else {
-				String strxianshi = kcshujuchuli(ke.getThursday());
-				if (!strxianshi.equals("")) {
-					createkecheng(strxianshi, x, 4, 4);
-				}
-
-			}
-			if (ke.getFriday().equals("?")) {
-				// System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-			} else {
-				String strxianshi = kcshujuchuli(ke.getFriday());
-				if (!strxianshi.equals("")) {
-					createkecheng(strxianshi, x, 5, 0);
-				}
-
-			}
-			if (ke.getSaturated().equals("?")) {
-				// System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-			} else {
-				String strxianshi = kcshujuchuli(ke.getSaturated());
-				if (!strxianshi.equals("")) {
-					createkecheng(strxianshi, x, 6, 1);
-				}
-
+				x = x + 2;
 			}
 
-			if (ke.getSunday().equals("?")) {
-				// System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-			} else {
-				String strxianshi = kcshujuchuli(ke.getSunday());
-				if (!strxianshi.equals("")) {
-					createkecheng(strxianshi, x, 7, 2);
-				}
-
-			}
-
-			x = x + 2;
-		}
-
-		 } catch (Exception e) {
-		 // TODO: handle exception
-		 Toast.makeText(KebiaoFragment.this.getActivity(), "教务系统已关闭课表查询", 1)
-		 .show();
-		 }
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//			Toast.makeText(KebiaoFragment.this.getActivity(), "教务系统已关闭课表查询2", 1)
+//					.show();
+//		}
 	}
 
 	private void switchFragment(Fragment fragment, String title) {

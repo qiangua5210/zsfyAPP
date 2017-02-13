@@ -20,6 +20,10 @@
         "source": "E:\\android2\\zhangshangfangyuan\\res\\drawable\\bg_edittext_selector.xml"
     },
     {
+        "merged": "E:\\android2\\zhangshangfangyuan\\build\\intermediates\\res\\merged\\debug\\drawable\\btn_ok_pressed.9.png",
+        "source": "E:\\android2\\zhangshangfangyuan\\res\\drawable\\btn_ok_pressed.9.png"
+    },
+    {
         "merged": "E:\\android2\\zhangshangfangyuan\\build\\intermediates\\res\\merged\\debug\\drawable\\course_info_light_grey.xml",
         "source": "E:\\android2\\zhangshangfangyuan\\res\\drawable\\course_info_light_grey.xml"
     },
@@ -134,6 +138,10 @@
     {
         "merged": "E:\\android2\\zhangshangfangyuan\\build\\intermediates\\res\\merged\\debug\\drawable\\chengji_icon.png",
         "source": "E:\\android2\\zhangshangfangyuan\\res\\drawable\\chengji_icon.png"
+    },
+    {
+        "merged": "E:\\android2\\zhangshangfangyuan\\build\\intermediates\\res\\merged\\debug\\drawable\\btn_ok_normal.9.png",
+        "source": "E:\\android2\\zhangshangfangyuan\\res\\drawable\\btn_ok_normal.9.png"
     },
     {
         "merged": "E:\\android2\\zhangshangfangyuan\\build\\intermediates\\res\\merged\\debug\\drawable\\arrow.png",

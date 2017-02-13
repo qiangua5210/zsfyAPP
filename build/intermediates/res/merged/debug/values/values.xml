@@ -94,6 +94,7 @@
     <string name="sun">周日</string>
     <string name="thu">周四</string>
     <string name="time_error">时间有问题</string>
+    <string name="title_activity_start">StartActivity</string>
     <string name="title_hint">标题</string>
     <string name="tue">周二</string>
     <string name="updated_at">上次更新于%1$s前</string>

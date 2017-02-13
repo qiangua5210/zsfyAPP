@@ -13,6 +13,7 @@ import com.fyzs.tool.ListadapterChengji;
 import com.fyzs.tool.RefreshableView;
 import com.fyzs.tool.RefreshableView.PullToRefreshListener;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -56,6 +57,7 @@ public class ChengjiFragment extends Fragment {
 	private Button updatecj;//刷新
 	int index=0;
 	private static final String TAG = "ChengjiFragment";
+	private ProgressDialog pd;
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 	}
@@ -102,18 +104,6 @@ public class ChengjiFragment extends Fragment {
 
 		}
 
-//		SimpleDateFormat formatter = new SimpleDateFormat(
-//				"yyyy");
-//		Date curDate = new Date(System.currentTimeMillis());// 获取当前时间
-//		String nowyearstr = formatter.format(curDate);
-//		int nowyear=Integer.parseInt(nowyearstr);
-
-//		list.add(nowyear-2+"-"+(nowyear-1)+"--1");
-//		list.add((nowyear-2)+"-"+(nowyear-1)+"--2");
-//		list.add(nowyear-1+"-"+nowyear+"--1");
-//		list.add(nowyear-1+"-"+nowyear+"--2");
-//		list.add(nowyear+"-"+(nowyear+1)+"--1");
-		//list.add("2015-2016--2");
 		setSpinner(view);
 		// InitListView();
 		if (infos.size() == 0) {
@@ -128,72 +118,73 @@ public class ChengjiFragment extends Fragment {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 //
-				SharedPreferences sp = ChengjiFragment.this
-						.getActivity().getSharedPreferences("StuData",
-								0);
-
-				final String xh = sp.getString("xh", "");
-				final String pwd = sp.getString("pwd", "");
-				String type = "";
-				int i = qsp.getSelectedItemPosition();
-				if (i == 0) {
-					final List<Chengji> infos1 = dao.findAll();
-
-					System.out.println("infos:" + infos1.size());
-					new Thread() {
-						public void run() {
-							int i=UpdateCJ.Update(xh, pwd, "", "", "1",
-									infos1.size(),
-									ChengjiFragment.this.getActivity());
-							index=i;
-							if(index==1)
-							{
-								infos = dao.findAll();
-								handler.sendEmptyMessage(1);
-
-							}
-							else
-								handler.sendEmptyMessage(2);
-						};
-					}.start();
-
-				} else if (i == 4) {
-					String str = list.get(i);
-					final String xuenian = str.split("--")[0];
-					final String xueqi = str.split("--")[1];
-					final List<Chengji> infos1 = dao.findXuenian(
-							xuenian, xueqi);
-					System.out.println("infos1:" + infos1.size());
-					// System.out.println(infos.size());
-
-					new Thread() {
-						public void run() {
-							int i=UpdateCJ.Update(xh, pwd, xuenian, xueqi,
-									"2", infos1.size(),
-									ChengjiFragment.this.getActivity());
-							index=i;
-							if(index==1)
-							{
-								infos = dao.findXuenian(xuenian, xueqi);
-								handler.sendEmptyMessage(1);
-
-
-							}
-							else
-								handler.sendEmptyMessage(2);
-						};
-					}.start();
-
-				} else {
-					handler.sendEmptyMessage(0);
-				}
-				try {
-					Thread.sleep(3000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				refreshableView.finishRefreshing();
-
+				refreshableView.setUpdate();
+				//pd = ProgressDialog.show(ChengjiFragment.this.getActivity(), "", "刷新中，请稍后……");// 等待的对话框
+//				SharedPreferences sp = ChengjiFragment.this
+//						.getActivity().getSharedPreferences("StuData",
+//								0);
+//				final String xh = sp.getString("xh", "");
+//				final String pwd = sp.getString("pwd", "");
+//				String type = "";
+//				int i = qsp.getSelectedItemPosition();
+//				if (i == 0) {
+//
+//					//System.out.println("infos:" + infos1.size());
+//					new Thread() {
+//						public void run() {
+//							final List<Chengji> infos1 = dao.findAll();
+//							int i=UpdateCJ.Update(xh, pwd, "", "", "1",
+//									infos1.size(),
+//									ChengjiFragment.this.getActivity());
+//							index=i;
+//							if(index==1)
+//							{
+//								infos = dao.findAll();
+//								handler.sendEmptyMessage(1);
+//
+//							}
+//							else
+//								handler.sendEmptyMessage(2);
+//						};
+//					}.start();
+//
+//				} else if (i == 4) {
+//					String str = list.get(i);
+//					final String xuenian = str.split("--")[0];
+//					final String xueqi = str.split("--")[1];
+//					final List<Chengji> infos1 = dao.findXuenian(
+//							xuenian, xueqi);
+//					System.out.println("infos1:" + infos1.size());
+//					// System.out.println(infos.size());
+//
+//					new Thread() {
+//						public void run() {
+//							int i=UpdateCJ.Update(xh, pwd, xuenian, xueqi,
+//									"2", infos1.size(),
+//									ChengjiFragment.this.getActivity());
+//							index=i;
+//							if(index==1)
+//							{
+//								infos = dao.findXuenian(xuenian, xueqi);
+//								handler.sendEmptyMessage(1);
+//
+//
+//							}
+//							else
+//								handler.sendEmptyMessage(2);
+//						};
+//					}.start();
+//
+//				} else {
+//					handler.sendEmptyMessage(0);
+//				}
+//				try {
+//					Thread.sleep(3000);
+//				} catch (InterruptedException e) {
+//					e.printStackTrace();
+//				}
+//
+//
 
 
 			}
@@ -305,10 +296,9 @@ public class ChengjiFragment extends Fragment {
 	Handler handler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {// handler接收到消息后就会执行此方法
-
+		//	pd.dismiss();// 关闭ProgressDialog
 			if (msg.what == 1) {
 				Toast.makeText(ChengjiFragment.this.getActivity(), "有最新成绩更新",0).show();
-				
 				myadapter = new myAdapter();
 				listview.setAdapter(myadapter); //
 				myadapter.notifyDataSetChanged();
@@ -322,6 +312,9 @@ public class ChengjiFragment extends Fragment {
 			}else if (msg.what == 3) {
 				Toast.makeText(ChengjiFragment.this.getActivity(),
 						"服务器拥挤请稍后重试", 0).show();
+			}else if (msg.what == 4) {
+				Toast.makeText(ChengjiFragment.this.getActivity(),
+						"刷新中。。。", 0).show();
 			}
 
 		}
